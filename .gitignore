@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Secrets ###
+src/main/resources/config/private.properties
+
+### Logs ###
+app.log
+*.log
