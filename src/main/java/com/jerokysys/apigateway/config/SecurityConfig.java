@@ -33,6 +33,11 @@ public class SecurityConfig {
             "/api/v1/invoices/**", "/api/v1/invoice-details/**"
     };
 
+    /** Rutas de gestión de personas. */
+    private static final String[] PERSONAS = {
+            "/api/v1/students/**", "/api/v1/guardians/**", "/api/v1/instructors/**"
+    };
+
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http,
                                                          ReactiveJwtAuthenticationConverter jwtConverter,
@@ -65,6 +70,13 @@ public class SecurityConfig {
                         .pathMatchers(HttpMethod.POST, INVOICES).hasAnyRole("ADMIN", "SECRETARY")
                         .pathMatchers(HttpMethod.PUT, INVOICES).hasAnyRole("ADMIN", "SECRETARY")
                         .pathMatchers(HttpMethod.DELETE, INVOICES).hasAnyRole("ADMIN", "SECRETARY")
+
+                        // ---------------- personas: ADMIN y SECRETARY -------------------
+                        .pathMatchers(HttpMethod.GET, PERSONAS).hasAnyRole("ADMIN", "SECRETARY")
+                        .pathMatchers(HttpMethod.POST, PERSONAS).hasAnyRole("ADMIN", "SECRETARY")
+                        .pathMatchers(HttpMethod.PUT, PERSONAS).hasAnyRole("ADMIN", "SECRETARY")
+                        .pathMatchers(HttpMethod.PATCH, PERSONAS).hasAnyRole("ADMIN", "SECRETARY")
+                        .pathMatchers(HttpMethod.DELETE, PERSONAS).hasAnyRole("ADMIN", "SECRETARY")
 
                         // ---------------------- todo lo demas ------------------------------
                         .anyExchange().authenticated())
