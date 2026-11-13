@@ -20,13 +20,21 @@ public class CorsConfig {
     @Value("${app.cors.allowed-origins:http://localhost:3000}")
     private String allowedOrigins;
 
-    @Value("${app.cors.allowed-methods:GET,POST,PUT,DELETE,OPTIONS}")
+    @Value("${app.cors.allowed-methods:GET,POST,PUT,PATCH,DELETE,OPTIONS}")
     private String allowedMethods;
 
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
-        config.setAllowedMethods(Arrays.asList(allowedMethods.split(",")));
+        config.setAllowedOrigins(
+                Arrays.stream(allowedOrigins.split(","))
+                        .map(String::trim)
+                        .filter(origin -> !origin.isEmpty())
+                        .toList());
+        config.setAllowedMethods(
+                Arrays.stream(allowedMethods.split(","))
+                        .map(String::trim)
+                        .filter(method -> !method.isEmpty())
+                        .toList());
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Retry-After"));
