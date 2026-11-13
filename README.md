@@ -29,8 +29,8 @@ strips client-supplied `X-User` / `X-Role` headers before routing.
 | `/api/v1/users/**` | any but POST | yes | 403 | 403 |
 | `/api/v1/classes/**`, `/disciplines/**`, `/enrollments/**`, `/exams/**`, `/exam-results/**` | GET | yes | yes | yes |
 | same academic routes | POST/PUT/DELETE | yes | yes | **403** |
-| `/api/v1/invoices/**`, `/invoice-details/**` | GET | yes | **403** | yes |
-| same invoice routes | POST/PUT/DELETE | yes | **403** | yes |
+| `/api/v1/invoices/**`, `/invoice-details/**`, `/tax-stamps/**` | GET | yes | **403** | yes |
+| same invoice/tax-stamp routes | POST/PUT/DELETE | yes | **403** | yes |
 | anything else | any | authenticated required | | |
 
 ### Examples

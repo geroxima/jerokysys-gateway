@@ -30,7 +30,7 @@ public class SecurityConfig {
 
     /** Rutas del microservicio de facturacion. */
     private static final String[] INVOICES = {
-            "/api/v1/invoices/**", "/api/v1/invoice-details/**"
+            "/api/v1/invoices/**", "/api/v1/invoice-details/**", "/api/v1/tax-stamps/**"
     };
 
     /** Rutas de gestión de personas. */
